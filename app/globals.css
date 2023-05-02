@@ -1,0 +1,48 @@
+:root {
+    --color-secondary: #18a096;
+    --color-primary: #f8b333;
+    --swiper-pagination-color: var(--color-primary);
+    --swiper-pagination-bullet-inactive-color: #ffffff;
+    --swiper-pagination-bullet-inactive-opacity: 0.7;
+    --swiper-pagination-bottom: 2px;
+    /* ... */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    @apply h-full bg-gray-50;
+}
+body {
+    @apply h-full;
+}
+main {
+    @apply p-4 md:p-10 mx-auto max-w-7xl h-full;
+}
+nav {
+    @apply bg-primary shadow-sm;
+}
+.logo {
+    @apply bg-white rounded-full;
+}
+.form {
+    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg;
+}
+.form-error {
+    @apply text-red-500 text-xs italic;
+}
+/* Form */
+label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+  }
+ input, textarea {
+    @apply appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
+  }
+  select {
+    @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+  }
+  .form-select-icon {
+    @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700;
+  }
