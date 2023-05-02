@@ -1,14 +1,11 @@
 import './globals.css';
-
-import Nav from './nav';
+import { ApolloClientProvider, NextAuthProvider } from "./providers";
 import AnalyticsWrapper from './analytics';
-import Toast from './toast';
-import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'Next.js 13 + PlanetScale + NextAuth + Tailwind CSS',
+  title: 'Login - JobRapide Admin',
   description:
-    'A user admin dashboard configured with Next.js, PlanetScale, NextAuth, Tailwind CSS, TypeScript, ESLint, and Prettier.'
+    'Dashboard JobRapide Admin Pages'
 };
 
 export default async function RootLayout({
@@ -17,15 +14,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full bg-gray-50">
-      <body className="h-full">
-        <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
-          <Nav />
-        </Suspense>
-        {children}
+    <html lang="fr">
+      <body>
+        <ApolloClientProvider>
+        <NextAuthProvider>
+          {children}
+        </NextAuthProvider>
+        </ApolloClientProvider>
         <AnalyticsWrapper />
-        <Toast />
       </body>
     </html>
   );

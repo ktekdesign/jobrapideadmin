@@ -1,0 +1,12 @@
+import { Card } from '@tremor/react';
+
+export default async function RecruteurActionsPage() {
+  return (
+    <main className="p-4 md:p-10 mx-auto max-w-7xl">
+      
+      <Card className="mt-6">
+        
+      </Card>
+    </main>
+  );
+}

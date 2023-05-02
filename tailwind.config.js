@@ -5,7 +5,13 @@ module.exports = {
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        dark: '#343434',
+      }
+    },
   },
   plugins: [],
 };

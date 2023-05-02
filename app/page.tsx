@@ -1,33 +1,21 @@
-import { Card, Title, Text } from '@tremor/react';
-import { queryBuilder } from '../lib/planetscale';
-import Search from './search';
-import UsersTable from './table';
+'use client'
+import Login from "../components/login";
+import Navbar from "./navbar";
+import { redirect } from "next/navigation";
+import { redirectPath } from "../utils/redirectPath";
+import { useSession } from "next-auth/react";
 
-export const dynamic = 'force-dynamic';
-
-export default async function IndexPage({
-  searchParams
-}: {
-  searchParams: { q: string };
-}) {
-  const search = searchParams.q ?? '';
-  const users = await queryBuilder
-    .selectFrom('users')
-    .select(['id', 'name', 'username', 'email'])
-    .where('name', 'like', `%${search}%`)
-    .execute();
-
+export default function IndexPage() {
+  const session = useSession();
+  
+  if(session?.status === "authenticated") return redirect(redirectPath(session?.data?.role))
+  
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Users</Title>
-      <Text>
-        A list of users retrieved from a MySQL database (PlanetScale).
-      </Text>
-      <Search />
-      <Card className="mt-6">
-        {/* @ts-expect-error Server Component */}
-        <UsersTable users={users} />
-      </Card>
-    </main>
-  );
+    <>
+      <Navbar />
+      <main>
+        <Login />
+      </main>
+    </>
+  )
 }
