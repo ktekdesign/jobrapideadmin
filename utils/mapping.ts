@@ -1,9 +1,8 @@
 import { Post, Term } from './interfaces/data';
-import { isEmpty, preventUndefined } from './manipulateArray';
 import { outputErrors } from './outputErrors';
 
 export const mapPost = (post: any): Post | null => {
-  if (isEmpty(post)) return null;
+  if (post) return null;
   try {
     const categories = post.categories?.nodes?.map((term: any) =>
       mapTerm(term)
@@ -12,28 +11,28 @@ export const mapPost = (post: any): Post | null => {
     const regions = post.regions?.nodes?.map((term: any) => mapTerm(term));
 
     return {
-      id: preventUndefined(post.databaseId),
-      title: preventUndefined(post.title),
-      image: preventUndefined(post.featuredImage?.node.sourceUrl),
-      date: preventUndefined(post.date),
-      excerpt: preventUndefined(post.excerpt),
-      content: preventUndefined(post.content),
-      uri: preventUndefined(post.uri),
-      categories: preventUndefined(categories),
-      secteurs: preventUndefined(secteurs),
-      regions: preventUndefined(regions)
+      id: post.databaseId ?? null,
+      title: post.title ?? null,
+      image: post.featuredImage?.node.sourceUrl ?? null,
+      date: post.date ?? null,
+      excerpt: post.excerpt ?? null,
+      content: post.content ?? null,
+      uri: post.uri ?? null,
+      categories: categories ?? null,
+      secteurs: secteurs ?? null,
+      regions: regions ?? null
     };
   } catch (err) {
     return outputErrors(err);
   }
 };
 export const mapTerm = (term: any): Term | null => {
-  if (isEmpty(term)) return null;
+  if (term) return null;
   try {
     return {
-      id: preventUndefined(term.databaseId),
-      name: preventUndefined(term.name),
-      slug: preventUndefined(term.slug)
+      id: term.databaseId ?? null,
+      name: term.name ?? null,
+      slug: term.slug ?? null
     };
   } catch (err) {
     return outputErrors(err);
