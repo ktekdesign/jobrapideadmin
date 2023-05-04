@@ -9,6 +9,7 @@ export const queryFromWPGraphQL = async (
 ) => {
   const body = query
     .replaceAll('$id', `${variables?.id}`)
+    .replaceAll('$page', `${variables?.page}`)
     .replaceAll('"$idType"', `"${variables?.idType}"`);
 
   try {
