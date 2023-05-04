@@ -1,4 +1,4 @@
-import ComponentsProps from '../utils/interfaces/components'
+import ComponentsProps from '../types/components'
 import { parseISO } from 'date-fns'
 import React, { FC, memo } from 'react'
 

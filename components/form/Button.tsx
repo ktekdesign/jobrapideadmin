@@ -11,7 +11,7 @@ const Button: FC<ButtonProps> = ({ children, label, ...props }) => {
 
   return (
     <button
-      className={className ?? 'bg-secondary hover:bg-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'}
+      className={className ?? 'button'}
       aria-label={label}
       title={label}
       {...args}

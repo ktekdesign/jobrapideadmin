@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
       //  below we set "user" param of "session" to value received from "jwt" callback
       session.id = token.id;
       session.role = token.role;
+      session.authToken = token.authToken;
       return Promise.resolve(session);
     }
   }

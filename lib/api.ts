@@ -3,12 +3,12 @@ import client from './client';
 import { mapPost } from '../utils/mapping';
 import { outputErrors } from '../utils/outputErrors';
 
-const queryFromWPGraphQL = async (
+export const queryFromWPGraphQL = async (
   query = '',
   variables: Record<string, string> = {}
 ) => {
   const body = query
-    .replaceAll('"$id"', `"${variables?.id}"`)
+    .replaceAll('$id', `${variables?.id}`)
     .replaceAll('"$idType"', `"${variables?.idType}"`);
 
   try {
@@ -89,3 +89,5 @@ export const getUserPosts = ({ data }: { data: any }) => {
     count: data?.posts?.pageInfo?.offsetPagination?.total
   };
 };
+
+export const getUserPost = (id: string) => {};

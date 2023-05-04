@@ -1,40 +1,40 @@
-import { Post, Term } from './interfaces/data';
+import { Post, Term } from '../types/data';
 import { outputErrors } from './outputErrors';
 
-export const mapPost = (post: any): Post | null => {
-  if (post) return null;
+export const mapPost = (post: any): Post => {
   try {
-    const categories = post.categories?.nodes?.map((term: any) =>
+    const categories = post?.categories?.nodes?.map((term: any) =>
       mapTerm(term)
     );
-    const secteurs = post.secteurs?.nodes?.map((term: any) => mapTerm(term));
-    const regions = post.regions?.nodes?.map((term: any) => mapTerm(term));
+    const secteurs = post?.secteurs?.nodes?.map((term: any) => mapTerm(term));
+    const regions = post?.regions?.nodes?.map((term: any) => mapTerm(term));
 
     return {
-      id: post.databaseId ?? null,
-      title: post.title ?? null,
-      image: post.featuredImage?.node.sourceUrl ?? null,
-      date: post.date ?? null,
-      excerpt: post.excerpt ?? null,
-      content: post.content ?? null,
-      uri: post.uri ?? null,
+      id: post?.databaseId ?? null,
+      title: post?.title ?? null,
+      image: post?.featuredImage?.node?.sourceUrl ?? null,
+      date: post?.date ?? null,
+      excerpt: post?.excerpt ?? null,
+      content: post?.content ?? null,
+      uri: post?.uri ?? null,
       categories: categories ?? null,
       secteurs: secteurs ?? null,
       regions: regions ?? null
     };
   } catch (err) {
-    return outputErrors(err);
+    outputErrors(err);
   }
+  return {} as Post;
 };
-export const mapTerm = (term: any): Term | null => {
-  if (term) return null;
+export const mapTerm = (term: any): Term => {
   try {
     return {
-      id: term.databaseId ?? null,
-      name: term.name ?? null,
-      slug: term.slug ?? null
+      id: term?.databaseId ?? null,
+      name: term?.name ?? null,
+      slug: term?.slug ?? null
     };
   } catch (err) {
-    return outputErrors(err);
+    outputErrors(err);
   }
+  return {} as Term;
 };

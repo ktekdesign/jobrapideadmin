@@ -2,8 +2,9 @@
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@tremor/**/*.{js,ts,jsx,tsx}'
+    './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
   ],
+  important: true,
   theme: {
     extend: {
       colors: {
@@ -13,5 +14,6 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: []
+
 };
