@@ -1,5 +1,6 @@
 import { Title, Text } from '@tremor/react';
 import PostsList from '../post';
+import Toast from './toast';
 
 
 export default async function IndexPage() {
@@ -10,7 +11,8 @@ export default async function IndexPage() {
         <Text>
           Ceci est la liste de toutes vos publications.
         </Text>
-          <PostsList />
+        <PostsList />
+        <Toast text="Besoin de publier une nouvelle offre?" title='Publier' link='/recruteur/add' />
       </>
     );
 }

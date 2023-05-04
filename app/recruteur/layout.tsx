@@ -7,9 +7,9 @@ import Navbar from './navbar';
 import { redirectPath } from '../../utils/redirectPath';
 
 export const metadata = {
-  title: 'Next.js 13 + PlanetScale + NextAuth + Tailwind CSS',
+  title: 'Recruteur Dashboard',
   description:
-    'A user admin dashboard configured with Next.js, PlanetScale, NextAuth, Tailwind CSS, TypeScript, ESLint, and Prettier.'
+    'Dashboard pour les recruteurs.'
 };
 
 export default async function RecruteurLayout({
@@ -28,7 +28,6 @@ export default async function RecruteurLayout({
       <Navbar user={user} />
       <main>
         {children}
-        <Toast />
       </main>
     </>
   );

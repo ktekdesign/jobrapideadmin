@@ -19,24 +19,22 @@ interface IFormHook<T> {
 function useFormData<T extends FieldValues>({
   url,
   initialData
-}: IFormHook<T>): {
-  data: { status?: string; message?: string; redirect?: string };
-  isLoading: boolean;
-  handleSubmit: () => Promise<void>;
-  register: UseFormRegister<T>;
-  errors: FieldErrors<T>;
-} {
+}: IFormHook<T>) {
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors }
   } = useForm<T>();
   const [formData, setFormData]: [
     SetStateAction<T | undefined>,
     Dispatch<SetStateAction<T | undefined>>
   ] = useState();
-  const onSubmit: SubmitHandler<T> = (data) => setFormData(data);
+  const onSubmit: SubmitHandler<T> = (data) => {
+    setFormData(data);
+    console.log(data);
+  };
 
   const fetcher = () =>
     axios
@@ -51,14 +49,15 @@ function useFormData<T extends FieldValues>({
       .catch((error) => console.log(error));
 
   const { data, isLoading } = useSWR(formData ? url : null, fetcher);
-  if (data?.redirect) return redirectPage(data?.redirect);
+  //if (data?.redirect) return redirectPage(data?.redirect);
 
   return {
     data,
     isLoading,
     handleSubmit: handleSubmit(onSubmit),
     register,
-    errors
+    errors,
+    setValue
   };
 }
 
