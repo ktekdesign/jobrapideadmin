@@ -6,6 +6,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -73,10 +74,17 @@ export default function Navbar({user}: {user: any}) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {user ? (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="/recruteur/profil" className={classNames(
+                            active ? 'bg-gray-100' : '',
+                            'flex w-full px-4 py-2 text-sm text-gray-700'
+                          )}>Profil</Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'flex w-full px-4 py-2 text-sm text-gray-700'
@@ -85,23 +93,9 @@ export default function Navbar({user}: {user: any}) {
                             >
                               Déconnexion
                             </button>
-                          )}
-                        </Menu.Item>
-                      ) : (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'flex w-full px-4 py-2 text-sm text-gray-700'
-                              )}
-                              onClick={() => signIn('github')}
-                            >
-                              Login
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
+                        )}
+                      </Menu.Item>
+                      
                     </Menu.Items>
                   </Transition>
                 </Menu>
@@ -139,7 +133,6 @@ export default function Navbar({user}: {user: any}) {
               ))}
             </div>
             <div className="border-t border-gray-200 pt-4 pb-3">
-              {user ? (
                 <>
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
@@ -161,24 +154,18 @@ export default function Navbar({user}: {user: any}) {
                     </div>
                   </div>
                   <div className="mt-3 space-y-1">
+                    <Link href="/recruteur/profil" className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Profil</Link>
+                  </div>
+                  <div className="mt-3 space-y-1">
                     <button
                       onClick={() => signOut()}
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 w-full text-left"
                     >
                       Déconnexion
                     </button>
                   </div>
                 </>
-              ) : (
-                <div className="mt-3 space-y-1">
-                  <button
-                    onClick={() => signIn('github')}
-                    className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                  >
-                    Login
-                  </button>
-                </div>
-              )}
+              
             </div>
           </Disclosure.Panel>
         </>

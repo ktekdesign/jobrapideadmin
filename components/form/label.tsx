@@ -8,7 +8,7 @@ const Label: FC<LabelProps> = ({ children, htmlFor, ...props }) => {
   const { className, ...rest } = props
   return (
     <label
-      className={`block text-gray-700 text-sm font-bold mb-2 ${className ? className : ''}`}
+      className={`label ${className ? className : ''}`}
       htmlFor={htmlFor}
       {...rest}
     >

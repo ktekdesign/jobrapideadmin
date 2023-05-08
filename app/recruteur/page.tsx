@@ -1,7 +1,7 @@
 'use client';
 import { Title, Text } from '@tremor/react';
 import PostsList from '../../components/post-list';
-import Toast from './toast';
+import Toast from '../../components/toast';
 import useResource from '@hooks/useResource';
 import Loading from '../loading';
 

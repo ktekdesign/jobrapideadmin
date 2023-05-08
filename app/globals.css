@@ -11,7 +11,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* Animation CSS */
+.animate-slideinRight {
+    animation: slideinRight .5s;
+    @apply relative;
+  }
+  @keyframes slideinRight {
+    0% {
+        right: -300px;
+        opacity: 0;
+    }
+    100% {
+        right: 0;
+        opacity: 1;
+    }
+  }
+  .animate-slideinLeft {
+    animation: slideinLeft .5s;
+    @apply relative;
+  }
+  @keyframes slideinLeft {
+    0% {
+        left: -300px;
+        opacity: 0;
+    }
+    100% {
+        leftt: 0;
+        opacity: 1;
+    }
+  }
+  .spin{animation:spin 2s infinite linear}
+  @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
 html {
     @apply h-full bg-gray-50;
 }
@@ -32,7 +62,7 @@ nav {
     @apply bg-white rounded-full;
 }
 .form {
-    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg;
+    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg mx-auto;
 }
 .form-error {
     @apply text-red-500 text-xs italic;
@@ -41,7 +71,7 @@ nav {
 label {
     @apply block uppercase cursor-pointer tracking-wide text-gray-700 text-xs font-bold mb-2;
   }
- input, textarea {
+ input[type=text], input[type=email], input[type=tel], textarea {
     @apply appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white;
   }
   input[type=checkbox] {
@@ -65,4 +95,59 @@ input[type=checkbox]:checked {
   }
   .step-title {
     @apply py-8 text-lg
+  }
+  .form {
+    @apply py-4;
+  }
+
+  .helper-radio {
+    @apply w-4 h-4 p-0 leading-none inline-block text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500;
+  }
+  .helper-radio-label {
+    @apply ml-8 font-medium text-dark normal-case text-sm mb-0 leading-none;
+  }
+  .helper-radio-text {
+    @apply text-xs font-normal text-gray-500 dark:text-gray-300;
+  }
+  .dropdownHelperRadioButton {
+    @apply text-white bg-secondary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center;
+  }
+  .dropdownHelperRadio {
+    @apply invisible top-16 z-0 absolute m-0 bg-white rounded-lg shadow w-60 h-60 overflow-y-auto peer-focus:visible peer-focus:z-20 hover:visible hover:z-20
+  }
+  .radio-container {
+    @apply p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200;
+  }
+  .radio-item {
+    @apply flex items-center mb-0 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600;
+  }
+  .radio-input {
+    @apply flex items-center;
+  }
+  .input-toggle-radio {
+    @apply sr-only;
+  }
+  .toggle-ui {
+    @apply w-12 h-6 bg-gray-200 rounded-full before:absolute before:top-0.5 before:left-[2px] before:bg-white before:border-gray-300 before:border before:rounded-full before:h-5 before:w-5 before:transition-all dark:border-gray-600 before:content-[''] relative inline-flex items-center cursor-pointer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-primary peer-checked:before:translate-x-full peer-checked:before:border-white peer-checked:bg-secondary;
+  }
+  .toggle-radio-group {
+    @apply flex flex-wrap justify-between relative w-2/3;
+  }
+  .toggle-label-span {
+    @apply ml-16;
+  }
+  .label {
+    @apply block text-gray-700 text-sm font-bold mb-2;
+  }
+  .toast-container {
+    @apply sticky max-w-screen-md z-10 bottom-0 left-0 right-0 mx-auto;
+  }
+  .toast-inner-container {
+    @apply w-full py-8 px-4 rounded-2xl bg-slate-200 border border-gray-200 flex flex-col sm:flex-row items-center justify-center sm:justify-between;
+  }
+  .toast-text {
+    @apply text-black text-sm flex items-center justify-center p-2;
+  }
+  .toast-link {
+    @apply text-white text-xs bg-secondary hover:bg-gray-700 transition-all rounded-md w-[220px] h-10 flex items-center justify-center whitespace-nowrap;
   }

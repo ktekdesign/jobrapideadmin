@@ -2,7 +2,6 @@
 import { Title, Text } from '@tremor/react';
 import PostForm from '../../../../components/form-post';
 import Loading from 'app/loading';
-import Toast from 'app/recruteur/toast';
 import useResource from '@hooks/useResource';
 
 
@@ -18,7 +17,6 @@ export default function IndexPage({ params }: { params: { id: number } }) {
         <Loading data={{post}} loading={!post} error={error}>
           <PostForm />
         </Loading>
-        <Toast text="Besoin de publier une nouvelle offre?" title='Publier' link='/recruteur/add' />
     </>
     );
 }

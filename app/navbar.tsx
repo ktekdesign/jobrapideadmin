@@ -13,7 +13,7 @@ function classNames(...classes: string[]) {
 
 const navigation = [
   { name: 'Créer un compte candidat', href: '/register' },
-  { name: 'Créer un compte Recruteur', href: '/register/recruteur' },
+  { name: 'Créer un compte Recruteur', href: '/register/?callbackUrl=recruteur' },
   { name: 'Mot de passe oublié ?', href: '/mot-de-passe-oublie' }
 ];
 
