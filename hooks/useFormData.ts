@@ -1,15 +1,8 @@
 import axios from 'axios';
-import { redirect as redirectPage } from 'next/navigation';
 
 import { Dispatch, SetStateAction, useState } from 'react';
-import {
-  FieldErrors,
-  FieldValues,
-  SubmitHandler,
-  UseFormRegister,
-  useForm
-} from 'react-hook-form';
-import useSWR from 'swr';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useHeaders } from './useHeaders';
 
 interface IFormHook<T> {
   url: string;
@@ -27,29 +20,36 @@ function useFormData<T extends FieldValues>({
     setValue,
     formState: { errors }
   } = useForm<T>();
-  const [formData, setFormData]: [
-    SetStateAction<T | undefined>,
-    Dispatch<SetStateAction<T | undefined>>
+  const headers = useHeaders();
+  const [data, setData]: [
+    SetStateAction<any | undefined>,
+    Dispatch<SetStateAction<any | undefined>>
   ] = useState();
+  const [isLoading, setIsLoading]: [
+    SetStateAction<boolean>,
+    Dispatch<SetStateAction<boolean>>
+  ] = useState(false);
   const onSubmit: SubmitHandler<T> = (data) => {
-    setFormData(data);
-    console.log(data);
-  };
+    setIsLoading(true);
 
-  const fetcher = () =>
+    const axiosHeaders = data?.jwtAuthToken
+      ? {
+          headers: {
+            Authorization: `Bearer ${data?.jwtAuthToken}`
+          }
+        }
+      : headers;
     axios
-      .post(url, formData)
+      .post(url, data, axiosHeaders)
       .then((response) => {
         if (!response?.data?.redirect) {
-          setFormData(undefined);
           reset(initialData);
         }
-        return response?.data;
+        setData(response?.data);
       })
-      .catch((error) => console.log(error));
-
-  const { data, isLoading } = useSWR(formData ? url : null, fetcher);
-  //if (data?.redirect) return redirectPage(data?.redirect);
+      .catch((error) => error)
+      .finally(() => setIsLoading(false));
+  };
 
   return {
     data,

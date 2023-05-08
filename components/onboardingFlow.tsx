@@ -1,23 +1,24 @@
-import { cloneElement } from 'react'
-import { Dispatch } from 'react'
-import { useEffect } from 'react'
-import { SetStateAction } from 'react'
-import { isValidElement } from 'react'
-import { Children, memo } from 'react'
-import { ReactNode } from 'react'
+import { memo, useEffect, useRef, cloneElement, isValidElement, Dispatch, SetStateAction, Children, ReactNode } from 'react'
 
 const OnboardingFlow = ({
   children,
   active,
+  count,
   setCount
-} : {children: ReactNode, active: number, setCount: Dispatch<SetStateAction<number>>}) => {
-  useEffect(() => setCount(Children.count(children)))
+} : {children: ReactNode, active: number, count?: number, setCount?: Dispatch<SetStateAction<number>>}) => {
+  const ref = useRef(0);
+  
+  useEffect(() => {
+    if(!setCount) return
+    ref.current = active
+    setCount(Children.count(children))
+  })
   
   return (
     <>
       {Children.map(children, (child, key) => 
       isValidElement(child) &&
-        <div className={key === active ? 'block' : 'hidden'}>{cloneElement(child)}</div>
+        <div className={key === active ? `block ${ref.current < active ? "animate-slideinRight" : "animate-slideinLeft"}` : 'hidden'}>{cloneElement(child, {...{active, count} })}</div>
       )}
     </>
   )

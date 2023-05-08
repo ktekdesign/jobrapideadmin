@@ -2,7 +2,7 @@ export const query = `
   query UserPost {
     posts(first: 10
       where: {
-        author: $userId
+        author: $id
         offsetPagination: { size: 10, offset: $page
           }
         orderby: { field: DATE, order: DESC }

@@ -65,3 +65,8 @@ export enum TermTypePlural {
   niveaux = 'niveaux',
   tags = 'tags'
 }
+
+export enum Role {
+  candidat = 'candidat',
+  recruteur = 'recruteur'
+}

@@ -1,7 +1,4 @@
-import '../globals.css';
-
 import { getServerSession } from 'next-auth/next';
-import Toast from './toast';
 import { redirect } from 'next/navigation';
 import Navbar from './navbar';
 import { redirectPath } from '../../utils/redirectPath';

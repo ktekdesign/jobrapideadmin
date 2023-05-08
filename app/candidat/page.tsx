@@ -1,25 +1,18 @@
 'use client';
 import { Title, Text } from '@tremor/react';
-import axios from 'axios';
-import { Suspense } from 'react';
-import PostsList from '../post';
+import PostsList from '../../components/post-list';
+import Toast from '../../components/toast';
+import useResource from '@hooks/useResource';
+import Loading from '../loading';
+import ProfileCandidat from '@components/profile/candidat';
 
-export default async function IndexPage() {
-  try {
-    const {data} = await axios.get("/api/user/posts")
+
+export default function IndexPage() {
     return (
       <>
-        <Title>Mes Publications</Title>
-        <Text>
-          Ceci est la liste de toutes vos publications.
-        </Text>
-        <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
-          <PostsList posts={data?.posts} />
-        </Suspense>
+        <Title>Profil</Title>
+        <ProfileCandidat />
+        <Toast text="Rendez votre profil visible aux recruteurs." title='Sponsoriser' link='/candidat/sponsor' />
       </>
     );
-  } catch(error) {
-    console.log(error)
-  }
 }

@@ -9,6 +9,7 @@ export const queryFromWPGraphQL = async (
 ) => {
   const body = query
     .replaceAll('$id', `${variables?.id}`)
+    .replaceAll('$page', `${variables?.page}`)
     .replaceAll('"$idType"', `"${variables?.idType}"`);
 
   try {
@@ -27,7 +28,7 @@ export const queryFromWPGraphQL = async (
   return;
 };
 
-const mutationFromWPGraphQL = async (mutation: string) => {
+export const mutationFromWPGraphQL = async (mutation: string) => {
   try {
     // WPGraphQL Plugin must be enabled
     const data = await client.mutate({
@@ -79,6 +80,37 @@ export const login = async ({
     image: data?.login?.user?.avatar?.url,
     role: roles.shift(),
     authToken: data?.login?.authToken
+  };
+};
+
+export const register = async ({
+  email,
+  password
+}: {
+  email: string;
+  password: string;
+}) => {
+  const data = await mutationFromWPGraphQL(`mutation RegisterUser {
+    registerUser( input: {
+      username: "${email}",
+      password: "${password}"
+      email: "${email}"
+    } ) {
+      user {
+        jwtAuthToken
+        databaseId
+        email
+        avatar {
+          url
+        }
+      }
+    }
+  }`);
+
+  return {
+    ...data?.registerUser?.user,
+    id: data?.registerUser?.user.databaseId,
+    authToken: data?.registerUser?.user.jwtAuthToken
   };
 };
 

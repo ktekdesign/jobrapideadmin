@@ -1,16 +1,11 @@
-import '../globals.css';
-
 import { getServerSession } from 'next-auth/next';
-import Toast from './toast';
 import { redirect } from 'next/navigation';
 import Navbar from './navbar';
-import { getSession, useSession } from 'next-auth/react';
-import axios from 'axios';
 
 export const metadata = {
-  title: 'Next.js 13 + PlanetScale + NextAuth + Tailwind CSS',
+  title: 'Candidat Dashboard',
   description:
-    'A user admin dashboard configured with Next.js, PlanetScale, NextAuth, Tailwind CSS, TypeScript, ESLint, and Prettier.'
+    'Dashboard pour les candidats.'
 };
 
 export default async function RecruteurLayout({
@@ -21,7 +16,6 @@ export default async function RecruteurLayout({
   const session = await getServerSession();
 
   const user = session?.user
-  
   if(!user) return redirect("/")
   
   return (
@@ -29,7 +23,6 @@ export default async function RecruteurLayout({
       <Navbar user={user} />
       <main>
         {children}
-        <Toast />
       </main>
     </>
   );
