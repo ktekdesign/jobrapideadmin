@@ -1,12 +1,12 @@
-import { Children, cloneElement, isValidElement, memo } from 'react'
+import { Children, ReactNode, cloneElement, isValidElement, memo } from 'react'
 import StringComponent from './string-component'
 
 const LoaderComponent = ({
   children,
-  component = null,
-  className = '',
+  component,
+  className,
   ...props
-}) => (
+}: {children: ReactNode; component?: string; className?: string}) => (
   <StringComponent {...{ component, className, ...props }}>
     {Children.map(children, (child) => {
       if (isValidElement(child)) return cloneElement(child, { ...props })

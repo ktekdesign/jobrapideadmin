@@ -1,12 +1,12 @@
-import React, { Children, cloneElement, isValidElement, memo } from 'react'
+import React, { Children, ReactNode, cloneElement, isValidElement, memo } from 'react'
 
 const Loading = ({
   children,
-  data = null,
-  loading = false,
-  error = null,
-  serial = false,
-}) => {
+  data,
+  loading,
+  error,
+  serial,
+}: {children: ReactNode; data?: any; loading?: boolean; error?: boolean; serial?: boolean}) => {
   if (loading)
     return (
       <div className="border border-primary row shadow rounded-md p-4 max-w-xl w-full mx-auto">
@@ -31,8 +31,8 @@ const Loading = ({
     <>
       {Children.map(children, (child, key) => {
         if (isValidElement(child)) {
-          if (serial) {
-            const datas = Object.values(data)
+          if (serial && data) {
+            const datas: any[] = Object.values(data)
 
             return cloneElement(child, datas[key])
           }
