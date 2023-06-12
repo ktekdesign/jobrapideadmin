@@ -22,8 +22,6 @@ export default function IndexPage({ searchParams }: { searchParams: { callbackUr
 
   return (
     <>
-      <Navbar />
-      <main>
       <OnboardingFlow active={active}>
         <RegisterForm setJwtAuthToken={setJwtAuthToken}  />
         <Profile role={searchParams?.callbackUrl ?? "candidat"} jwtAuthToken={jwtAuthToken} />
@@ -31,7 +29,6 @@ export default function IndexPage({ searchParams }: { searchParams: { callbackUr
       {!!active && 
         <Toast text="Félicitations! Votre compte a été créé. Remplissez correctement le formulaire ci-dessus pour mettre à jour votre profil." link="#" title="Ok" />
       }
-      </main>
-    </>
+    </>   
   )
 }

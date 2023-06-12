@@ -1,5 +1,7 @@
-import Login from "../../components/login";
+import ForgotPasswordForm from "@components/forgotPassword-form";
 
 export default async function IndexPage() {
-  return <Login />
+  return (
+    <ForgotPasswordForm />
+  )
 }

@@ -114,6 +114,20 @@ export const register = async ({
   };
 };
 
+export const sendPasswordResetEmail = async ({ email }: { email: string }) => {
+  const data = await mutationFromWPGraphQL(`
+    mutation SendPasswordResetEmail {
+      sendPasswordResetEmail( input: {
+        username: "${email}"
+      } ) {
+        success
+      }
+    }`);
+  return {
+    success: data?.sendPasswordResetEmail?.success
+  };
+};
+
 export const getUserPosts = ({ data }: { data: any }) => {
   if (!data) return null;
   return {

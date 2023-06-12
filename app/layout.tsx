@@ -1,6 +1,9 @@
 import './globals.css';
 import { ApolloClientProvider, NextAuthProvider } from "./providers";
 import AnalyticsWrapper from './analytics';
+import Copyright from '@components/copyright';
+import Nav from "./nav";
+import { getServerSession } from 'next-auth';
 
 export const metadata = {
   title: 'Login - JobRapide Admin',
@@ -18,9 +21,13 @@ export default async function RootLayout({
       <body>
         <ApolloClientProvider>
         <NextAuthProvider>
-          {children}
+          <Nav />
+          <main id='layout'>
+            {children}
+          </main>
         </NextAuthProvider>
         </ApolloClientProvider>
+        <Copyright />
         <AnalyticsWrapper />
       </body>
     </html>
