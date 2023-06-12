@@ -1,6 +1,5 @@
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
-import Navbar from './navbar';
 
 export const metadata = {
   title: 'Candidat Dashboard',
@@ -18,12 +17,6 @@ export default async function RecruteurLayout({
   const user = session?.user
   if(!user) return redirect("/")
   
-  return (
-    <>
-      <Navbar user={user} />
-      <main>
-        {children}
-      </main>
-    </>
-  );
+  return <>{children}</>
+
 }

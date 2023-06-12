@@ -1,6 +1,5 @@
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
-import Navbar from './navbar';
 import { redirectPath } from '../../utils/redirectPath';
 
 export const metadata = {
@@ -14,18 +13,12 @@ export default async function RecruteurLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
+  const session = await getServerSession()
 
   const user = session?.user
   
   if(!user && redirectPath(session?.role ?? "") !== "/recruteur") return redirect("/")
   
-  return (
-    <>
-      <Navbar user={user} />
-      <main>
-        {children}
-      </main>
-    </>
-  );
+  return <>{children}</>
+
 }

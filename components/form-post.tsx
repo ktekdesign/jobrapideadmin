@@ -56,7 +56,7 @@ export default function PostForm({post} : {post?: Post}) {
             <Text className='mb-4'>
               A cette étape, vous devez renseigner un titre et une description complète pour votre offre.
             </Text>
-          <Input label="Titre" value={post?.title ?? ""} {...register('title', { required: true })}>
+          <Input label="Titre" defaultValue={post?.title ?? ""} {...register('title', { required: true })}>
           {errors.title && <p className="form-error">Ce champ est obligatoire.</p>}
           </Input>
           <Editor

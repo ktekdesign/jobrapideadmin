@@ -10,7 +10,6 @@ import ProfileCandidat from '@components/profile/candidat';
 export default function IndexPage() {
     return (
       <>
-        <Title>Profil</Title>
         <ProfileCandidat />
         <Toast text="Rendez votre profil visible aux recruteurs." title='Sponsoriser' link='/candidat/sponsor' />
       </>
